@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:recipedia_app/colors/color_custom.dart';
+import 'package:recipedia_app/widget/recipe_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -136,23 +137,28 @@ class _HomePageState extends State<HomePage> {
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Image(
-                                  image:
-                                      AssetImage("assets/images/chicken.png"),
-                                  width: 67,
-                                  height: 66,
-                                ),
-                                Text(
-                                  "Chicken",
-                                  style: TextStyle(
-                                    color: ColorCustoms.blueberry,
-                                    fontSize: 14,
+                            child: InkWell(
+                              onTap: () {
+                                print("Chicken");
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Image(
+                                    image:
+                                        AssetImage("assets/images/chicken.png"),
+                                    width: 67,
+                                    height: 66,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    "Chicken",
+                                    style: TextStyle(
+                                      color: ColorCustoms.blueberry,
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -166,22 +172,28 @@ class _HomePageState extends State<HomePage> {
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Image(
-                                  image: AssetImage("assets/images/pasta.png"),
-                                  width: 67,
-                                  height: 66,
-                                ),
-                                Text(
-                                  "Pasta",
-                                  style: TextStyle(
-                                    color: ColorCustoms.blueberry,
-                                    fontSize: 14,
+                            child: InkWell(
+                              onTap: () {
+                                print("Pasta");
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Image(
+                                    image:
+                                        AssetImage("assets/images/pasta.png"),
+                                    width: 67,
+                                    height: 66,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    "Pasta",
+                                    style: TextStyle(
+                                      color: ColorCustoms.blueberry,
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -195,22 +207,28 @@ class _HomePageState extends State<HomePage> {
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Image(
-                                  image: AssetImage("assets/images/potato.png"),
-                                  width: 67,
-                                  height: 66,
-                                ),
-                                Text(
-                                  "Potato",
-                                  style: TextStyle(
-                                    color: ColorCustoms.blueberry,
-                                    fontSize: 14,
+                            child: InkWell(
+                              onTap: () {
+                                print("Potato");
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Image(
+                                    image:
+                                        AssetImage("assets/images/potato.png"),
+                                    width: 67,
+                                    height: 66,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    "Potato",
+                                    style: TextStyle(
+                                      color: ColorCustoms.blueberry,
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -228,28 +246,33 @@ class _HomePageState extends State<HomePage> {
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Image(
-                                  image:
-                                      AssetImage("assets/images/chocolate.png"),
-                                  width: 67,
-                                  height: 66,
-                                ),
-                                Text(
-                                  "Chocolate",
-                                  style: TextStyle(
-                                    color: ColorCustoms.blueberry,
-                                    fontSize: 14,
+                            child: InkWell(
+                              onTap: () {
+                                print("Chocolate");
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Image(
+                                    image: AssetImage(
+                                        "assets/images/chocolate.png"),
+                                    width: 67,
+                                    height: 66,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    "Chocolate",
+                                    style: TextStyle(
+                                      color: ColorCustoms.blueberry,
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(
-                          width: 15,
+                          width: 5,
                         ),
                         Container(
                           width: 115,
@@ -261,22 +284,27 @@ class _HomePageState extends State<HomePage> {
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Image(
-                                  image: AssetImage("assets/images/beef.png"),
-                                  width: 67,
-                                  height: 66,
-                                ),
-                                Text(
-                                  "Ground Beef",
-                                  style: TextStyle(
-                                    color: ColorCustoms.blueberry,
-                                    fontSize: 14,
+                            child: InkWell(
+                              onTap: () {
+                                print("Beef");
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Image(
+                                    image: AssetImage("assets/images/beef.png"),
+                                    width: 67,
+                                    height: 66,
                                   ),
-                                )
-                              ],
+                                  Text(
+                                    "Ground Beef",
+                                    style: TextStyle(
+                                      color: ColorCustoms.blueberry,
+                                      fontSize: 14,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -300,6 +328,18 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 20,
                           fontWeight: FontWeight.w500))),
             ),
+            const RecipeCard(
+                name: "Easy Beef Hand Pies",
+                cookTime: "30 min",
+                rating: "3.5",
+                imageUrl:
+                    "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg"),
+            const RecipeCard(
+                name: "Easy Beef Hand Pies",
+                cookTime: "30 min",
+                rating: "3.5",
+                imageUrl:
+                    "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg")
           ],
         ),
       ),
