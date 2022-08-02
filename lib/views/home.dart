@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:recipedia_app/colors/color_custom.dart';
+import 'package:recipedia_app/views/search_result.dart';
 import 'package:recipedia_app/widget/recipe_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -81,8 +82,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: TextField(
                   controller: searchValue,
-                  onSubmitted: (value) {
-                    print(searchValue.text);
+                  onSubmitted: (value) async {
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SearchResultPage(
+                            searchValue: searchValue.text,
+                          ),
+                        ));
                     searchValue.clear();
                   },
                   style: const TextStyle(color: ColorCustoms.blueberry),
@@ -139,7 +146,14 @@ class _HomePageState extends State<HomePage> {
                                         ColorCustoms.yellow.withOpacity(0.25))),
                             child: InkWell(
                               onTap: () {
-                                print("Chicken");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchResultPage(
+                                        searchValue: "Chicken",
+                                      ),
+                                    ));
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -174,7 +188,14 @@ class _HomePageState extends State<HomePage> {
                                         ColorCustoms.yellow.withOpacity(0.25))),
                             child: InkWell(
                               onTap: () {
-                                print("Pasta");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchResultPage(
+                                        searchValue: "Pasta",
+                                      ),
+                                    ));
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -209,7 +230,14 @@ class _HomePageState extends State<HomePage> {
                                         ColorCustoms.yellow.withOpacity(0.25))),
                             child: InkWell(
                               onTap: () {
-                                print("Potato");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchResultPage(
+                                        searchValue: "Potato",
+                                      ),
+                                    ));
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -248,7 +276,14 @@ class _HomePageState extends State<HomePage> {
                                         ColorCustoms.yellow.withOpacity(0.25))),
                             child: InkWell(
                               onTap: () {
-                                print("Chocolate");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchResultPage(
+                                        searchValue: "Chocolate",
+                                      ),
+                                    ));
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -286,7 +321,14 @@ class _HomePageState extends State<HomePage> {
                                         ColorCustoms.yellow.withOpacity(0.25))),
                             child: InkWell(
                               onTap: () {
-                                print("Beef");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchResultPage(
+                                        searchValue: "Beef",
+                                      ),
+                                    ));
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
