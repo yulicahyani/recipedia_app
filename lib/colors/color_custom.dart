@@ -6,4 +6,5 @@ class ColorCustoms {
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
   static const grey = Color(0xFF999696);
+  static const lightGrey = Color(0xFFAFABAB);
 }

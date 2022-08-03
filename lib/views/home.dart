@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:recipedia_app/colors/color_custom.dart';
+import 'package:recipedia_app/views/detail_recipe.dart';
 import 'package:recipedia_app/views/search_result.dart';
 import 'package:recipedia_app/widget/recipe_card.dart';
 
@@ -370,18 +371,26 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 20,
                           fontWeight: FontWeight.w500))),
             ),
-            const RecipeCard(
-                name: "Easy Beef Hand Pies",
-                cookTime: "30 min",
-                rating: "3.5",
-                imageUrl:
-                    "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg"),
-            const RecipeCard(
-                name: "Easy Beef Hand Pies",
-                cookTime: "30 min",
-                rating: "3.5",
-                imageUrl:
-                    "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg")
+            ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DetailRecipePage()));
+                    },
+                    child: const RecipeCard(
+                        name: "Easy Beef Hand Pies",
+                        cookTime: "30 min",
+                        rating: "3.5",
+                        imageUrl:
+                            "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg"),
+                  );
+                }),
           ],
         ),
       ),
