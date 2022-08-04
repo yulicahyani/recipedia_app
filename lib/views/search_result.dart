@@ -1,12 +1,41 @@
 import 'package:flutter/material.dart';
 
+import '../colors/color_custom.dart';
+import '../model/recipe.dart';
+import '../model/recipe_api.dart';
 import '../widget/recipe_card.dart';
 import 'detail_recipe.dart';
 
-class SearchResultPage extends StatelessWidget {
+class SearchResultPage extends StatefulWidget {
   final String? searchValue;
-  const SearchResultPage({Key? key, required this.searchValue})
-      : super(key: key);
+
+  const SearchResultPage({super.key, this.searchValue});
+
+  @override
+  // ignore: no_logic_in_create_state
+  State<SearchResultPage> createState() => _SearchResultPage(searchValue);
+}
+
+class _SearchResultPage extends State<SearchResultPage> {
+  final String? searchQuery;
+
+  late List<Recipe> recipe;
+  bool isLoading = true;
+
+  _SearchResultPage(this.searchQuery);
+
+  Future<void> getRecipe(String query) async {
+    recipe = await RecipeApi.getRecipeSearch(query.toLowerCase());
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    getRecipe(searchQuery!);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +43,30 @@ class SearchResultPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Text(searchValue!),
+          title: Text(searchQuery!),
         ),
-        body: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const DetailRecipePage()));
-                },
-                child: const RecipeCard(
-                    name: "Easy Beef Hand Pies",
-                    cookTime: "30 min",
-                    rating: "3.5",
-                    imageUrl:
-                        "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg"),
-              );
-            }));
+        body: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: ColorCustoms.yellow,
+                ),
+              )
+            : ListView.builder(
+                itemCount: recipe.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DetailRecipePage()));
+                    },
+                    child: RecipeCard(
+                        name: recipe[index].name,
+                        cookTime: recipe[index].cookTime,
+                        rating: recipe[index].rating,
+                        imageUrl: recipe[index].imageUrl),
+                  );
+                }));
   }
 }
