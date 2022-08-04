@@ -59,4 +59,25 @@ class RecipeApi {
 
     return Recipe.recipeFromSnapshot(temp);
   }
+
+  static Future<List<Recipe>> getSimilarRecipe(String id) async {
+    var url = Uri.https('tasty.p.rapidapi.com', '/recipes/list-similarities',
+        {"recipe_id": id});
+
+    final response = await http.get(url, headers: {
+      "X-RapidAPI-Key": "b3d0a3183bmsh829a4f759cdadcbp1c76ccjsn16e327df0ec9",
+      "X-RapidAPI-Host": "tasty.p.rapidapi.com",
+      "useQueryString": "true"
+    });
+
+    Map data = jsonDecode(response.body);
+
+    List temp = [];
+
+    for (var i in data['results']) {
+      temp.add(i);
+    }
+
+    return Recipe.recipeFromSnapshot(temp);
+  }
 }

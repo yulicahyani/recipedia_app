@@ -19,13 +19,13 @@ class SearchResultPage extends StatefulWidget {
 class _SearchResultPage extends State<SearchResultPage> {
   final String? searchQuery;
 
-  late List<Recipe> recipe;
+  late List<Recipe> recipes;
   bool isLoading = true;
 
   _SearchResultPage(this.searchQuery);
 
   Future<void> getRecipe(String query) async {
-    recipe = await RecipeApi.getRecipeSearch(query.toLowerCase());
+    recipes = await RecipeApi.getRecipeSearch(query.toLowerCase());
     setState(() {
       isLoading = false;
     });
@@ -52,20 +52,22 @@ class _SearchResultPage extends State<SearchResultPage> {
                 ),
               )
             : ListView.builder(
-                itemCount: recipe.length,
+                itemCount: recipes.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const DetailRecipePage()));
+                              builder: (context) => DetailRecipePage(
+                                    recipe: recipes[index],
+                                  )));
                     },
                     child: RecipeCard(
-                        name: recipe[index].name,
-                        cookTime: recipe[index].cookTime,
-                        rating: recipe[index].rating,
-                        imageUrl: recipe[index].imageUrl),
+                        name: recipes[index].name,
+                        cookTime: recipes[index].cookTime,
+                        rating: recipes[index].rating,
+                        imageUrl: recipes[index].imageUrl),
                   );
                 }));
   }

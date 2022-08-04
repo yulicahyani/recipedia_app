@@ -3,16 +3,40 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../colors/color_custom.dart';
+import '../model/recipe.dart';
+import '../model/recipe_api.dart';
 import '../widget/recipe_card.dart';
 
 class DetailRecipePage extends StatefulWidget {
-  const DetailRecipePage({Key? key}) : super(key: key);
+  final Recipe recipe;
+  const DetailRecipePage({Key? key, required this.recipe}) : super(key: key);
 
   @override
-  State<DetailRecipePage> createState() => _DetailRecipePageState();
+  // ignore: no_logic_in_create_state
+  State<DetailRecipePage> createState() => _DetailRecipePageState(recipe);
 }
 
 class _DetailRecipePageState extends State<DetailRecipePage> {
+  final Recipe recipe;
+
+  _DetailRecipePageState(this.recipe);
+
+  late final List<Recipe> recipes;
+  bool isLoading = true;
+
+  Future<void> getSimilarRecipe(String id) async {
+    recipes = await RecipeApi.getSimilarRecipe(id);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    getSimilarRecipe(recipe.id.toString());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +64,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         spreadRadius: -8.0),
                   ],
                   image: DecorationImage(
-                    image: const NetworkImage(
-                        "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg"),
+                    image: NetworkImage(recipe.imageUrl),
                     colorFilter: ColorFilter.mode(
                         Colors.black.withOpacity(0.25), BlendMode.multiply),
                     fit: BoxFit.cover,
@@ -63,18 +86,20 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                 ),
               ),
             ),
-            const Padding(
-                padding: EdgeInsets.only(
+            Padding(
+                padding: const EdgeInsets.only(
                   top: 20,
                   left: 20,
                   right: 20,
                 ),
-                child: Text("Nama Resep Makanan",
-                    maxLines: 2,
-                    style: TextStyle(
-                        color: ColorCustoms.blueberry,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold))),
+                child: Text(
+                  recipe.name,
+                  maxLines: 2,
+                  style: const TextStyle(
+                      color: ColorCustoms.blueberry,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                )),
             Padding(
               padding: const EdgeInsets.only(
                 top: 10,
@@ -88,8 +113,8 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Cook Time",
                             style: TextStyle(
                               color: ColorCustoms.grey,
@@ -97,12 +122,12 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                               fontSize: 14,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
-                            "30 Min",
-                            style: TextStyle(
+                            recipe.cookTime,
+                            style: const TextStyle(
                               color: ColorCustoms.yellow,
                               fontFamily: "Inter",
                               fontSize: 16,
@@ -113,8 +138,8 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Rating",
                             style: TextStyle(
                               color: ColorCustoms.grey,
@@ -122,12 +147,12 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                               fontSize: 14,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
-                            "3.5",
-                            style: TextStyle(
+                            recipe.rating,
+                            style: const TextStyle(
                               color: ColorCustoms.yellow,
                               fontFamily: "Inter",
                               fontSize: 16,
@@ -138,8 +163,8 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Serving",
                             style: TextStyle(
                               color: ColorCustoms.grey,
@@ -147,12 +172,12 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                               fontSize: 14,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
-                            "2 pp",
-                            style: TextStyle(
+                            '${recipe.numServings} pp',
+                            style: const TextStyle(
                               color: ColorCustoms.yellow,
                               fontFamily: "Inter",
                               fontSize: 16,
@@ -167,6 +192,32 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                     color: ColorCustoms.lightGrey,
                   ),
                 ],
+              ),
+            ),
+            const Padding(
+                padding: EdgeInsets.only(
+                  top: 10,
+                  left: 20,
+                  right: 20,
+                ),
+                child: Text("Description",
+                    style: TextStyle(
+                        color: ColorCustoms.blueberry,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500))),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 20,
+                  right: 20,
+                ),
+                child: Card(
+                  child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(recipe.description)),
+                ),
               ),
             ),
             const Padding(
@@ -418,28 +469,34 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         fontWeight: FontWeight.w500))),
             SizedBox(
               height: 250,
-              child: ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const DetailRecipePage()));
-                      },
-                      child: const RecipeCard(
-                          name: "Easy Beef Hand Pies",
-                          cookTime: "30 min",
-                          rating: "3.5",
-                          imageUrl:
-                              "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/1a08783ea26843a88d3b14c938976ee0.jpeg"),
-                    );
-                  }),
+              child: isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: ColorCustoms.yellow,
+                      ),
+                    )
+                  : ListView.builder(
+                      physics: const ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: recipes.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailRecipePage(
+                                          recipe: recipes[index],
+                                        )));
+                          },
+                          child: RecipeCard(
+                              name: recipes[index].name,
+                              cookTime: recipes[index].cookTime,
+                              rating: recipes[index].rating,
+                              imageUrl: recipes[index].imageUrl),
+                        );
+                      }),
             ),
           ],
         )),

@@ -411,8 +411,9 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const DetailRecipePage()));
+                                  builder: (context) => DetailRecipePage(
+                                        recipe: recipe[index],
+                                      )));
                         },
                         child: RecipeCard(
                             name: recipe[index].name,
