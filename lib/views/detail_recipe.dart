@@ -216,7 +216,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                 child: Card(
                   child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(recipe.description)),
+                      child: recipe.description == "No descriptions"
+                          ? Text(recipe.description)
+                          : Text("No description")),
                 ),
               ),
             ),
@@ -245,20 +247,21 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                     child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: recipe.ingredients.length,
                         itemBuilder: ((context, index) {
-                          return const ListTile(
-                            visualDensity:
-                                VisualDensity(horizontal: -4, vertical: -4),
+                          return ListTile(
+                            visualDensity: const VisualDensity(
+                                horizontal: -4, vertical: -4),
                             horizontalTitleGap: 2.0,
-                            leading: Icon(
+                            leading: const Icon(
                               Icons.circle,
                               size: 11,
                               color: ColorCustoms.yellow,
                             ),
                             title: Text(
-                              "Ingredients 1",
-                              style: TextStyle(fontSize: 14),
+                              recipe
+                                  .ingredients[index].components[index].rawText,
+                              style: const TextStyle(fontSize: 14),
                             ),
                           );
                         })),
@@ -286,7 +289,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
               child: ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 5,
+                  itemCount: recipe.instructions.length,
                   itemBuilder: ((context, index) {
                     return SizedBox(
                       width: MediaQuery.of(context).size.width,
@@ -302,9 +305,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                               style: const TextStyle(
                                   color: ColorCustoms.yellow, fontSize: 20),
                             ),
-                            title: const Text(
-                              "Instrutions 1 Instrutions Instrutions Instrutions Instrutions",
-                              style: TextStyle(fontSize: 14),
+                            title: Text(
+                              recipe.instructions[index].displayText,
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),

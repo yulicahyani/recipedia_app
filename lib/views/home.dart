@@ -161,6 +161,7 @@ class _HomePageState extends State<HomePage> {
                             elevation: 5.0,
                             shadowColor: ColorCustoms.black.withOpacity(0.5),
                             shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
@@ -203,6 +204,7 @@ class _HomePageState extends State<HomePage> {
                             elevation: 5.0,
                             shadowColor: ColorCustoms.black.withOpacity(0.5),
                             shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
@@ -245,6 +247,7 @@ class _HomePageState extends State<HomePage> {
                             elevation: 5.0,
                             shadowColor: ColorCustoms.black.withOpacity(0.5),
                             shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
@@ -291,6 +294,7 @@ class _HomePageState extends State<HomePage> {
                             elevation: 5.0,
                             shadowColor: ColorCustoms.black.withOpacity(0.5),
                             shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),
@@ -336,6 +340,7 @@ class _HomePageState extends State<HomePage> {
                             elevation: 5.0,
                             shadowColor: ColorCustoms.black.withOpacity(0.5),
                             shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
                                 side: BorderSide(
                                     color:
                                         ColorCustoms.yellow.withOpacity(0.25))),

@@ -1,3 +1,34 @@
+class Component {
+  final String rawText;
+
+  Component({required this.rawText});
+
+  factory Component.fromJson(Map<String, dynamic> json) =>
+      Component(rawText: json['raw_text'] ?? '');
+}
+
+class Ingredient {
+  final List<Component> components;
+
+  Ingredient({required this.components});
+
+  factory Ingredient.fromJson(Map<String, dynamic> json) => Ingredient(
+        components: json['components'] != null
+            ? List<Component>.from(
+                json["components"].map((x) => Component.fromJson(x)))
+            : [],
+      );
+}
+
+class Instruction {
+  final String displayText;
+
+  Instruction({required this.displayText});
+
+  factory Instruction.fromJson(Map<String, dynamic> json) =>
+      Instruction(displayText: json['display_text'] ?? '');
+}
+
 class Recipe {
   final String name;
   final String imageUrl;
@@ -7,6 +38,8 @@ class Recipe {
   final String numServings;
   final int id;
   final String videoUrl;
+  final List<Instruction> instructions;
+  final List<Ingredient> ingredients;
 
   Recipe(
       {required this.name,
@@ -16,7 +49,9 @@ class Recipe {
       required this.description,
       required this.numServings,
       required this.id,
-      required this.videoUrl});
+      required this.videoUrl,
+      required this.instructions,
+      required this.ingredients});
 
   factory Recipe.fromJson(dynamic json) {
     return Recipe(
@@ -29,12 +64,24 @@ class Recipe {
         cookTime: json['total_time_minutes'] != null
             ? "${json['total_time_minutes']} Min"
             : "30 Min",
-        description: json['description'] ?? "No description",
+        description: json['description'] != null
+            ? json['description']
+            : "No description",
         numServings: json['num_servings'] != null
             ? json['num_servings'].toString()
             : "No info",
         id: json['id'] as int,
-        videoUrl: json['video_url'] ?? "No video");
+        videoUrl: json['original_video_url'] != null
+            ? json['original_video_url']
+            : "No video",
+        instructions: json['instructions'] != null
+            ? List<Instruction>.from(
+                json["instructions"].map((x) => Instruction.fromJson(x)))
+            : [],
+        ingredients: json['sections'] != null
+            ? List<Ingredient>.from(
+                json["sections"].map((x) => Ingredient.fromJson(x)))
+            : []);
   }
 
   static List<Recipe> recipeFromSnapshot(List snapshot) {
