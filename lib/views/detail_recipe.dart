@@ -34,6 +34,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
   @override
   void initState() {
     getSimilarRecipe(recipe.id.toString());
+    print(recipe.ingredients.length);
     super.initState();
   }
 
@@ -249,21 +250,43 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: recipe.ingredients.length,
                         itemBuilder: ((context, index) {
-                          return ListTile(
-                            visualDensity: const VisualDensity(
-                                horizontal: -4, vertical: -4),
-                            horizontalTitleGap: 2.0,
-                            leading: const Icon(
-                              Icons.circle,
-                              size: 11,
-                              color: ColorCustoms.yellow,
-                            ),
-                            title: Text(
-                              recipe
-                                  .ingredients[index].components[index].rawText,
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                          );
+                          // return ListTile(
+                          //   visualDensity: const VisualDensity(
+                          //       horizontal: -4, vertical: -4),
+                          //   horizontalTitleGap: 2.0,
+                          //   leading: const Icon(
+                          //     Icons.circle,
+                          //     size: 11,
+                          //     color: ColorCustoms.yellow,
+                          //   ),
+                          //   title: Text(
+                          //     recipe
+                          //         .ingredients[index].components[index].rawText,
+                          //     style: const TextStyle(fontSize: 14),
+                          //   ),
+                          // );
+                          return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount:
+                                  recipe.ingredients[index].components.length,
+                              itemBuilder: ((context, index1) {
+                                return ListTile(
+                                  visualDensity: const VisualDensity(
+                                      horizontal: -4, vertical: -4),
+                                  horizontalTitleGap: 2.0,
+                                  leading: const Icon(
+                                    Icons.circle,
+                                    size: 11,
+                                    color: ColorCustoms.yellow,
+                                  ),
+                                  title: Text(
+                                    recipe.ingredients[index].components[index1]
+                                        .rawText,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                );
+                              }));
                         })),
                   ),
                 ),
