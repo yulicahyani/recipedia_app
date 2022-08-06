@@ -34,7 +34,6 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
   @override
   void initState() {
     getSimilarRecipe(recipe.id.toString());
-    print(recipe.ingredients.length);
     super.initState();
   }
 
@@ -250,21 +249,6 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: recipe.ingredients.length,
                         itemBuilder: ((context, index) {
-                          // return ListTile(
-                          //   visualDensity: const VisualDensity(
-                          //       horizontal: -4, vertical: -4),
-                          //   horizontalTitleGap: 2.0,
-                          //   leading: const Icon(
-                          //     Icons.circle,
-                          //     size: 11,
-                          //     color: ColorCustoms.yellow,
-                          //   ),
-                          //   title: Text(
-                          //     recipe
-                          //         .ingredients[index].components[index].rawText,
-                          //     style: const TextStyle(fontSize: 14),
-                          //   ),
-                          // );
                           return ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -326,7 +310,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                             leading: Text(
                               (index + 1).toString(),
                               style: const TextStyle(
-                                  color: ColorCustoms.yellow, fontSize: 20),
+                                color: ColorCustoms.yellow,
+                                fontSize: 20,
+                              ),
                             ),
                             title: Text(
                               recipe.instructions[index].displayText,
@@ -361,118 +347,118 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Column(
-                      children: const [
+                      children: [
                         ListTile(
                           visualDensity:
-                              VisualDensity(horizontal: -4, vertical: -4),
+                              const VisualDensity(horizontal: -4, vertical: -4),
                           horizontalTitleGap: 2.0,
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.circle,
                             size: 11,
                             color: ColorCustoms.yellow,
                           ),
-                          title: Text(
+                          title: const Text(
                             "Calories",
                             style: TextStyle(fontSize: 14),
                           ),
                           trailing: Text(
-                            "100",
-                            style: TextStyle(
+                            recipe.nutrition.calories,
+                            style: const TextStyle(
                                 color: ColorCustoms.yellow, fontSize: 16),
                           ),
                         ),
                         ListTile(
                           visualDensity:
-                              VisualDensity(horizontal: -4, vertical: -4),
+                              const VisualDensity(horizontal: -4, vertical: -4),
                           horizontalTitleGap: 2.0,
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.circle,
                             size: 11,
                             color: ColorCustoms.yellow,
                           ),
-                          title: Text(
+                          title: const Text(
                             "Fat",
                             style: TextStyle(fontSize: 14),
                           ),
                           trailing: Text(
-                            "16g",
-                            style: TextStyle(
+                            recipe.nutrition.fat,
+                            style: const TextStyle(
                                 color: ColorCustoms.yellow, fontSize: 16),
                           ),
                         ),
                         ListTile(
                           visualDensity:
-                              VisualDensity(horizontal: -4, vertical: -4),
+                              const VisualDensity(horizontal: -4, vertical: -4),
                           horizontalTitleGap: 2.0,
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.circle,
                             size: 11,
                             color: ColorCustoms.yellow,
                           ),
-                          title: Text(
+                          title: const Text(
                             "Carbs",
                             style: TextStyle(fontSize: 14),
                           ),
                           trailing: Text(
-                            "20g",
-                            style: TextStyle(
+                            recipe.nutrition.carbohydrates,
+                            style: const TextStyle(
                                 color: ColorCustoms.yellow, fontSize: 16),
                           ),
                         ),
                         ListTile(
                           visualDensity:
-                              VisualDensity(horizontal: -4, vertical: -4),
+                              const VisualDensity(horizontal: -4, vertical: -4),
                           horizontalTitleGap: 2.0,
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.circle,
                             size: 11,
                             color: ColorCustoms.yellow,
                           ),
-                          title: Text(
+                          title: const Text(
                             "Fiber",
                             style: TextStyle(fontSize: 14),
                           ),
                           trailing: Text(
-                            "25g",
-                            style: TextStyle(
+                            recipe.nutrition.fiber,
+                            style: const TextStyle(
                                 color: ColorCustoms.yellow, fontSize: 16),
                           ),
                         ),
                         ListTile(
                           visualDensity:
-                              VisualDensity(horizontal: -4, vertical: -4),
+                              const VisualDensity(horizontal: -4, vertical: -4),
                           horizontalTitleGap: 2.0,
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.circle,
                             size: 11,
                             color: ColorCustoms.yellow,
                           ),
-                          title: Text(
+                          title: const Text(
                             "Sugar",
                             style: TextStyle(fontSize: 14),
                           ),
                           trailing: Text(
-                            "10g",
-                            style: TextStyle(
+                            recipe.nutrition.sugar,
+                            style: const TextStyle(
                                 color: ColorCustoms.yellow, fontSize: 16),
                           ),
                         ),
                         ListTile(
                           visualDensity:
-                              VisualDensity(horizontal: -4, vertical: -4),
+                              const VisualDensity(horizontal: -4, vertical: -4),
                           horizontalTitleGap: 2.0,
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.circle,
                             size: 11,
                             color: ColorCustoms.yellow,
                           ),
-                          title: Text(
+                          title: const Text(
                             "Protein",
                             style: TextStyle(fontSize: 14),
                           ),
                           trailing: Text(
-                            "32g",
-                            style: TextStyle(
+                            recipe.nutrition.protein,
+                            style: const TextStyle(
                                 color: ColorCustoms.yellow, fontSize: 16),
                           ),
                         ),
