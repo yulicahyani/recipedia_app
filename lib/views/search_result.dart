@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../colors/color_custom.dart';
 import '../model/recipe.dart';
@@ -39,6 +40,9 @@ class _SearchResultPage extends State<SearchResultPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,

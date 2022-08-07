@@ -94,7 +94,8 @@ class Recipe {
       cookTime: json['total_time_minutes'] != null
           ? "${json['total_time_minutes']} Min"
           : "30 Min",
-      description: json['description'] ?? "No description",
+      description:
+          json['description'] != null ? json['description'] : "No description",
       numServings: json['num_servings'] != null
           ? json['num_servings'].toString()
           : "No info",

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:recipedia_app/views/video_recipe.dart';
 
 import '../colors/color_custom.dart';
 import '../model/recipe.dart';
@@ -39,6 +41,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -69,18 +74,27 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         Colors.black.withOpacity(0.25), BlendMode.multiply),
                     fit: BoxFit.cover,
                   )),
-              child: Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      print("tap video play");
-                    },
-                    child: const Icon(
-                      Icons.play_circle,
-                      color: ColorCustoms.yellow,
-                      size: 80,
+              child: Visibility(
+                visible: recipe.videoUrl != 'No video' ? true : false,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        print(recipe.videoUrl);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VideoRecipePage(
+                                      vidUrl: recipe.videoUrl,
+                                    )));
+                      },
+                      child: const Icon(
+                        Icons.play_circle,
+                        color: ColorCustoms.yellow,
+                        size: 80,
+                      ),
                     ),
                   ),
                 ),
@@ -216,9 +230,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                 child: Card(
                   child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: recipe.description == "No descriptions"
+                      child: recipe.description != "No descriptions"
                           ? Text(recipe.description)
-                          : Text("No description")),
+                          : const Text("No description")),
                 ),
               ),
             ),
@@ -267,7 +281,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                                   title: Text(
                                     recipe.ingredients[index].components[index1]
                                         .rawText,
-                                    style: const TextStyle(fontSize: 14),
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 );
                               }));
